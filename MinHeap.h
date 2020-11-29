@@ -1,3 +1,10 @@
+/*
+ * MinHeap.h
+ */
+
+#ifndef MINHEAP_H_
+#define MINHEAP_H_
+
 #pragma once
 #include <assert.h>
 #include <algorithm>
@@ -43,55 +50,18 @@ private:
 
 		this->capacity = newCapacity;
 		this->arr = newArr;
-		
+
 
 	}
 
-	void shiftUp(int index)
+	void percolateUp(int index)
 	{
-		if (index < 1)
-			return;
-
-		int parent = (index-1) / 2;
-
-		if (this->arr[index].key < this->arr[parent].key)
-		{
-		   swap(this->arr[index], this->arr[parent]);
-		   shiftUp(parent);
-		}
-
-		return;
+		// Implement this member function
 	}
 
-	void shiftDown(int index)
+	void percolateDown(int index)
 	{
-		int minIndex = -1;
-		int lChildIndex = index * 2+1;
-		int rChildIndex = (index * 2) + 2;
-
-		if (lChildIndex < totalItems)
-		{
-			if (arr[index].key > arr[lChildIndex].key)
-			{
-				minIndex = lChildIndex;
-			}
-		}
-
-		if (rChildIndex < totalItems)
-		{
-			if (arr[(minIndex == -1 ? index : minIndex)].key > arr[rChildIndex].key)
-			{
-				minIndex = rChildIndex;
-			}
-		}
-
-		if (minIndex == -1)
-			return;
-
-		swap(arr[index], arr[minIndex]);
-		shiftDown(minIndex);
-
-
+		// Implement this member function
 	}
 
 public:
@@ -117,20 +87,15 @@ public:
 		{
 			doubleCapacity();
 		}
-	
-		
+
+
 		this->arr[totalItems].key = key;
 		this->arr[totalItems].value = value;
 
 
-		shiftUp(totalItems);
+		percolateUp(totalItems);
 		this->totalItems++;
 
-		//iterative shift up
-		//for (int i =this->totalItems; i >= 2 && (this->arr[i].key < this->arr[i / 2].key); i=i/ 2)
-		//{
-		//	swap(this->arr[i], this->arr[i / 2]);
-		//}
 
 	}
 
@@ -152,15 +117,15 @@ public:
 		totalItems--;
 
 		//shift down
-		shiftDown(0);
+		percolateDown(0);
 	}
-	
+
 	bool isEmpty() const
 	{
 		return (totalItems == 0);
 	}
 
-	
+
 
 	void deleteAll()
 	{
@@ -171,7 +136,7 @@ public:
 			this->capacity = 0;
 			this->totalItems = 0;
 		}
-		
+
 	}
 
 	~MinHeap()
@@ -180,3 +145,9 @@ public:
 	}
 
 };
+
+
+
+
+
+#endif /* MINHEAP_H_ */
